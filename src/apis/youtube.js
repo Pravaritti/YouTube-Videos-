@@ -15,6 +15,7 @@ export default axios.create({
 
   params: {
     part: "snippet",
+    type: "video", //to ensure we only serach for videos and not playlists
     maxResults: 5,
     //we have to append our API key onto our URL whenever we try to make a request
     key: KEY,
