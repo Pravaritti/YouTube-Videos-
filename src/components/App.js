@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 import youtube from "../apis/youtube";
+import VideoList from "./VideoList";
 
 class App extends React.Component {
   state = { videos: [] };
@@ -27,6 +28,7 @@ class App extends React.Component {
         <SearchBar onFormSubmit={this.onTermSubmit} />
         {/*name of the prop could be anything of our choice -> it has callback Function. */}
         I have {this.state.videos.length} videos.
+        <VideoList videos={this.state.videos} />
       </div>
     );
   }
