@@ -2,9 +2,10 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import youtube from "../apis/youtube";
 import VideoList from "./VideoList";
+import VideoDetail from "./VideoDetail";
 
 class App extends React.Component {
-  state = { videos: [] };
+  state = { videos: [], selectedVideo: null };
   onTermSubmit = async (term) => {
     console.log(term);
 
@@ -21,14 +22,26 @@ class App extends React.Component {
     this.setState({ videos: response.data.items });
   };
 
+  //since this id going to be a callback function, we make it an arrow function.
+  //video object is what we retrieve from youtube api
+  onVideoSelect = (video) => {
+    console.log("From the AP!", video);
+    this.setState({ selectedVideo: video });
+  };
+
   render() {
     return (
       <div className="ui container">
         {/* putting classNAme in div gives it a container like boundary */}
         <SearchBar onFormSubmit={this.onTermSubmit} />
         {/*name of the prop could be anything of our choice -> it has callback Function. */}
-        I have {this.state.videos.length} videos.
-        <VideoList videos={this.state.videos} />
+        {/*I have {this.state.videos.length} videos.*/}
+        <VideoDetail video={this.state.selectedVideo} />
+        {/*we are passing video prop*/}
+        <VideoList
+          onVideoSelect={this.onVideoSelect}
+          videos={this.state.videos}
+        />
       </div>
     );
   }
