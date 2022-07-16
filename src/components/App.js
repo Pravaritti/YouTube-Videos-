@@ -6,6 +6,12 @@ import VideoDetail from "./VideoDetail";
 
 class App extends React.Component {
   state = { videos: [], selectedVideo: null };
+
+  //will go ahead and attempt to make some default search when this app component first is rendered to the screen
+  componentDidMount() {
+    this.onTermSubmit("helloadele"); //so when teh application first loads, it is going to do a search for hello by adele and show result on screen
+  }
+
   onTermSubmit = async (term) => {
     console.log(term);
 
@@ -19,7 +25,10 @@ class App extends React.Component {
 
     console.log(response); //entire response object that has ton of information about the request that was just made.
     //response -> data -> items = list of videos we are interested in
-    this.setState({ videos: response.data.items });
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0], //setting default video as 1st video
+    });
   };
 
   //since this id going to be a callback function, we make it an arrow function.
