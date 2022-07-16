@@ -36,12 +36,21 @@ class App extends React.Component {
         <SearchBar onFormSubmit={this.onTermSubmit} />
         {/*name of the prop could be anything of our choice -> it has callback Function. */}
         {/*I have {this.state.videos.length} videos.*/}
-        <VideoDetail video={this.state.selectedVideo} />
-        {/*we are passing video prop*/}
-        <VideoList
-          onVideoSelect={this.onVideoSelect}
-          videos={this.state.videos}
-        />
+
+        <div className="ui grid">
+          <div className="ui row">
+            <div className="eleven wide column">
+              <VideoDetail video={this.state.selectedVideo} />
+              {/*we are passing video prop*/}
+            </div>
+            <div className="five wide column">
+              <VideoList
+                onVideoSelect={this.onVideoSelect}
+                videos={this.state.videos}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
